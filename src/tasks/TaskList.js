@@ -4,9 +4,17 @@ import Task from './Task';
 import NewTaskForm from './NewtaskForm';
 
 
-const Tasklist = () => {
+const Tasklist = ({ toDoItem }) => {
+    
+    const elements = toDoItem.map((item) => {
+        return Task(item)
+    }
+    
+    )
+
     return <ul className="todo-list">
-        <li className="completed">
+        {elements}
+        {/* <li className="completed">
             <Task />
         </li>
         <li className="editing">
@@ -15,7 +23,7 @@ const Tasklist = () => {
         </li>
         <li>
              <Task/>
-        </li>
+        </li> */}
        
     </ul>
 }
