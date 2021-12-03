@@ -5,27 +5,36 @@ import Tasklist from './tasks/TaskList';
 import Footer from './Footer';
 
 
-
-const App = () => {
-    const toDoData = [
-        { label: 'drink tea', status: true, important: false, date: new Date('November 26, 2021 03:24:00') },
-        { label: 'drink coffee', status: false, important: false, date: new Date('November 26, 2021 03:24:00') },
-        { label: 'learn react', status: true, important:true, date: new Date('November 26, 2021 03:24:00') }
+class App extends React.Component{
+    state = {
+       toDoData: [
+        { label: 'drink tea',  important: false, date: new Date('November 26, 2021 03:24:00') },
+        { label: 'drink coffee',  important: true, date: new Date('November 26, 2021 03:24:00') },
+        { label: 'learn react',  important:true, date: new Date('November 26, 2021 03:24:00') }
     ]
-    return <section className='todoapp'>
+   }
+   
+    render() {
+        return <section className='todoapp'>
         <Header />
         <section className='main'>
-            <Tasklist toDoItem={toDoData }/>
+            <Tasklist toDoItem={this.state.toDoData }/>
         </section>
         <Footer/>
     </section>
+
+    }
 }
+
+ 
+    
+
    
 
         
 
 
 
-ReactDOM.render(<App/>, document.querySelector('body'))
+ReactDOM.render(<App/>, document.getElementById('root'))
 
 

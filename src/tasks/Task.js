@@ -1,24 +1,63 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { formatDistanceToNow, subDays } from 'date-fns'
+import { formatDistanceToNow } from 'date-fns'
 
 
-const Task = ({ status, label, date }) => {
-  const liStyle = status ? '' : 'completed'
-  const daysBetween = formatDistanceToNow(date)
-  console.log(daysBetween);
-  return <li className={liStyle}>
-    <div className="view">
-      <input className="toggle" type="checkbox"></input>
-      <label>
-        <span className="description">{label}</span>
-        <span className="created">{ daysBetween }</span>
-      </label>
-      <button className="icon icon-edit"></button>
-      <button className="icon icon-destroy"></button>
-    </div>
-  </li>
 
+export default class Task extends React.Component{
+
+  state = {
+    complited:false
   }
 
-export default Task
+    onLabelClick=()=> {
+      this.setState((state) => {
+        return {
+          complited:!state.complited
+        }
+    
+  })
+  }
+  render() {
+    const { label, date } = this.props
+
+    const daysBetween = formatDistanceToNow(date)
+    const { complited } = this.state
+    let classNames 
+    if (complited) {
+      classNames='completed'
+    }
+          return <li className={classNames}>
+        <div className="view">
+          <input className="toggle" type="checkbox"></input>
+          <label>
+            <span className='description'
+                  onClick = {this.onLabelClick}>{label}</span>
+            <span className="created">{ daysBetween }</span>
+          </label>
+          <button className="icon icon-edit"></button>
+          <button className="icon icon-destroy"></button>
+        </div>
+      </li>
+
+  }
+}
+  
+// const Task = ({ status, label, date }) => {
+//   const liStyle = status ? '' : 'completed'
+//   const daysBetween = formatDistanceToNow(date)
+
+//   return <li className={liStyle}>
+//     <div className="view">
+//       <input className="toggle" type="checkbox"></input>
+//       <label>
+//         <span className="description">{label}</span>
+//         <span className="created">{ daysBetween }</span>
+//       </label>
+//       <button className="icon icon-edit"></button>
+//       <button className="icon icon-destroy"></button>
+//     </div>
+//   </li>
+
+//   }
+
+// export default Task
