@@ -18,7 +18,7 @@ export default class Task extends React.Component{
   })
   }
   render() {
-    const { label, date } = this.props
+    const { label, date, id } = this.props
 
     const daysBetween = formatDistanceToNow(date)
     const { complited } = this.state
@@ -26,7 +26,7 @@ export default class Task extends React.Component{
     if (complited) {
       classNames='completed'
     }
-          return <li className={classNames}>
+    return <li className={classNames} key={id}>
         <div className="view">
           <input className="toggle" type="checkbox"></input>
           <label>
@@ -35,8 +35,8 @@ export default class Task extends React.Component{
             <span className="created">{ daysBetween }</span>
           </label>
           <button className="icon icon-edit"></button>
-          <button className="icon icon-destroy"></button>
-        </div>
+        <button className="icon icon-destroy"></button>
+          </div>
       </li>
 
   }
