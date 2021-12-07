@@ -3,15 +3,17 @@ import React from 'react';
 
 
 class Header extends React.Component  {
-    state = { value: '' };
+    state = { value: '' }
+   
     // valueListener = (e) => {
     //     if (e.keyCode === 13) {
     //         console.log(this.state.value)
     //     }
     // }
+     addItem=this.props.addItem
     onSubmiteForm = (e) => {
         e.preventDefault()
-        console.log(this.state.value);
+        this.addItem(this.state.value);
     }
     onLabelChange = (e) => {
         this.setState({
@@ -20,7 +22,7 @@ class Header extends React.Component  {
     }
     
     render() {
-        
+        const{addItem}=this.props
          return <header className ="header">
              <form
                  className = "header-form"

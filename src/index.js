@@ -9,9 +9,7 @@ class App extends React.Component{
     maxId = 100
     state = {
         toDoData: [
-            this.createtoDoItem('drink tea'),
-            this.createtoDoItem('drink coffee'),
-            this.createtoDoItem('have a lunch')
+            
            ]
     }
     
@@ -22,27 +20,39 @@ class App extends React.Component{
             return {toDoData: newArray}
         })
     }
-    onItemAdded = (text) => {
-        
+    addItem = (text) => {
+        const newItem={
+            label: text,
+            id: this.maxId++,
+            done: false,
+            date:new Date()
+        }
+
+        this.setState(({toDoData})=>{
+            const newArr=[
+                ...toDoData, newItem
+            ]    
+            return{toDoData:newArr}  
+         })
     }    
     onToggleDone = (id) => {
         console.log('Done',id);
     }
 
-    createtoDoItem (text) {
-        return {
-            label: text,
-            id: this.maxId++,
-            done: false,
-            date:new Date()
-       }
-    }
+    // createtoDoItem (text) {
+    //     return {
+    //         label: text,
+    //         id: this.maxId++,
+    //         done: false,
+    //         date:new Date()
+    //    }
+    // }
     
 
     render() {
         return <section className='todoapp'>
             <Header
-                onItemAdded={this.onItemAdded}/>
+                addItem={this.addItem}/>
         <section className='main'>
                 <Tasklist
                     toDoItem={this.state.toDoData}
