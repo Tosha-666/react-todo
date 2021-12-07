@@ -5,37 +5,39 @@ import { formatDistanceToNow } from 'date-fns'
 
 export default class Task extends React.Component{
 
-  state = {
-    complited:false
-  }
+  // state = {
+  //   complited:false
+  // }
 
-    onLabelClick=()=> {
-      this.setState((state) => {
-        return {
-          complited:!state.complited
-        }
+  //   onLabelClick=()=> {
+  //     this.setState((state) => {
+  //       return {
+  //         complited:!state.complited
+  //       }
     
-  })
-  }
+  // })
+  // }
   render() {
-    const { label, date, id } = this.props
-
+    const { label, date, onDestroyed, onToggleDone } = this.props
     const daysBetween = formatDistanceToNow(date)
-    const { complited } = this.state
+    // const { complited } = this.state
     let classNames 
-    if (complited) {
-      classNames='completed'
-    }
-    return <li className={classNames} key={id}>
+    // if (complited) {
+    //   classNames='completed'
+    // }
+    return <li className={classNames} >
         <div className="view">
           <input className="toggle" type="checkbox"></input>
           <label>
             <span className='description'
-                  onClick = {this.onLabelClick}>{label}</span>
+                  onClick = {onToggleDone}>{label}</span>
             <span className="created">{ daysBetween }</span>
           </label>
           <button className="icon icon-edit"></button>
-        <button className="icon icon-destroy"></button>
+        <button
+          className="icon icon-destroy"
+          onClick = {onDestroyed}
+        ></button>
           </div>
       </li>
 

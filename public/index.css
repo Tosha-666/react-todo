@@ -83,7 +83,10 @@ body {
 	-moz-text-rendering: optimizeLegibility;
 	text-rendering: optimizeLegibility;
 }
-
+.header-form {
+	margin: 0;
+	padding: 0;
+}
 .new-todo,
 .edit {
 	position: relative;
