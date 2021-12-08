@@ -32,11 +32,28 @@ class App extends React.Component{
             const newArr=[
                 ...toDoData, newItem
             ]    
-            return{toDoData:newArr}  
-         })
+            return {
+                toDoData: newArr
+            }
+        })
+        
     }    
     onToggleDone = (id) => {
-        console.log('Done',id);
+        this.setState(({ toDoData }) => {
+            const doneId = toDoData.findIndex((el) => el.id === id)
+            const oldItem = toDoData[doneId]
+            
+            const newItem ={...oldItem, done:!oldItem.done}
+            const newArr = [
+                ...toDoData.slice(0, doneId), newItem, ...toDoData.slice(doneId+1)
+            ]
+            console.log(oldItem, doneId, newItem, newArr);
+            return {
+                toDoData:newArr
+            }
+            
+
+        })
     }
 
     // createtoDoItem (text) {

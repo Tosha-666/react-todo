@@ -18,13 +18,13 @@ export default class Task extends React.Component{
   // })
   // }
   render() {
-    const { label, date, onDestroyed, onToggleDone } = this.props
+    const { label, date, onDestroyed, onToggleDone, done } = this.props
     const daysBetween = formatDistanceToNow(date)
-    // const { complited } = this.state
+  
     let classNames 
-    // if (complited) {
-    //   classNames='completed'
-    // }
+    if (done) {
+      classNames='completed'
+    }
     return <li className={classNames} >
         <div className="view">
           <input className="toggle" type="checkbox"></input>
@@ -44,22 +44,3 @@ export default class Task extends React.Component{
   }
 }
   
-// const Task = ({ status, label, date }) => {
-//   const liStyle = status ? '' : 'completed'
-//   const daysBetween = formatDistanceToNow(date)
-
-//   return <li className={liStyle}>
-//     <div className="view">
-//       <input className="toggle" type="checkbox"></input>
-//       <label>
-//         <span className="description">{label}</span>
-//         <span className="created">{ daysBetween }</span>
-//       </label>
-//       <button className="icon icon-edit"></button>
-//       <button className="icon icon-destroy"></button>
-//     </div>
-//   </li>
-
-//   }
-
-// export default Task

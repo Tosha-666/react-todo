@@ -14,6 +14,9 @@ class Header extends React.Component  {
     onSubmiteForm = (e) => {
         e.preventDefault()
         this.addItem(this.state.value);
+        this.setState({
+            value:''
+        })
     }
     onLabelChange = (e) => {
         this.setState({
