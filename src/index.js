@@ -7,10 +7,9 @@ import Footer from './Footer';
 
 class App extends React.Component{
     maxId = 100
+    
     state = {
-        toDoData: [
-            
-           ]
+        toDoData: [ ]
     }
     
     deleteItem = (id) => {
@@ -25,7 +24,8 @@ class App extends React.Component{
             label: text,
             id: this.maxId++,
             done: false,
-            date:new Date()
+            date: new Date(),
+            checked:false
         }
 
         this.setState(({toDoData})=>{
@@ -43,31 +43,20 @@ class App extends React.Component{
             const doneId = toDoData.findIndex((el) => el.id === id)
             const oldItem = toDoData[doneId]
             
-            const newItem ={...oldItem, done:!oldItem.done}
+            const newItem ={...oldItem, done:!oldItem.done, checked:!oldItem.checked}
             const newArr = [
                 ...toDoData.slice(0, doneId), newItem, ...toDoData.slice(doneId+1)
             ]
-            console.log(oldItem, doneId, newItem, newArr);
+            // console.log(oldItem, doneId, newItem, newArr);
             return {
                 toDoData:newArr
             }
-            
-
         })
     }
-
-    // createtoDoItem (text) {
-    //     return {
-    //         label: text,
-    //         id: this.maxId++,
-    //         done: false,
-    //         date:new Date()
-    //    }
-    // }
     
-
     render() {
-        return <section className='todoapp'>
+        const elseToDo = this.state.toDoData.length - this.state.toDoData.filter((el) => el.done).length
+          return <section className='todoapp'>
             <Header
                 addItem={this.addItem}/>
         <section className='main'>
@@ -76,13 +65,16 @@ class App extends React.Component{
                     onDestroyed={this.deleteItem}
                     onToggleDone={ this.onToggleDone}/>
         </section>
-        <Footer/>
+            <Footer
+                elseToDo={ elseToDo}/>
         </section>
         
 
     }
 }
 
-ReactDOM.render(<App/>, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'))
+
+// https://www.youtube.com/watch?v=8s6JmWC9LqQ
 
 

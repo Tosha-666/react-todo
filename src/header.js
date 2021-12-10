@@ -25,7 +25,6 @@ class Header extends React.Component  {
     }
     
     render() {
-        const{addItem}=this.props
          return <header className ="header">
              <form
                  className = "header-form"

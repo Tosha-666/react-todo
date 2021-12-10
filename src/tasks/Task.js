@@ -18,7 +18,7 @@ export default class Task extends React.Component{
   // })
   // }
   render() {
-    const { label, date, onDestroyed, onToggleDone, done } = this.props
+    const { label, date, onDestroyed, onToggleDone, done, checked } = this.props
     const daysBetween = formatDistanceToNow(date)
   
     let classNames 
@@ -27,7 +27,12 @@ export default class Task extends React.Component{
     }
     return <li className={classNames} >
         <div className="view">
-          <input className="toggle" type="checkbox"></input>
+        <input
+          className="toggle"
+          type="checkbox"
+          checked={checked}
+          onChange={onToggleDone}
+        ></input>
           <label>
             <span className='description'
                   onClick = {onToggleDone}>{label}</span>
