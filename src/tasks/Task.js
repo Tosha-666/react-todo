@@ -36,7 +36,7 @@ export default class Task extends React.Component{
           <label>
             <span className='description'
                   onClick = {onToggleDone}>{label}</span>
-            <span className="created">{ daysBetween }</span>
+            <span className="created">created { daysBetween } ago</span>
           </label>
           <button className="icon icon-edit"></button>
         <button

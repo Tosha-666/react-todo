@@ -9,7 +9,8 @@ class App extends React.Component{
     maxId = 100
     
     state = {
-        toDoData: [ ]
+        toDoData: [],
+        filter:'all'
     }
     
     deleteItem = (id) => {
@@ -54,6 +55,39 @@ class App extends React.Component{
         })
     }
     
+    deleteComplited = () => {
+        const uncomplitedItems = this.state.toDoData.filter((item) => !item.done)
+        this.setState(
+            { toDoData: uncomplitedItems }
+        )
+    }
+
+    setFilter = (filter) => {
+        
+        this.setState({ filter })
+        console.log(this.state.filter);
+    };
+
+    getFilteredItems = (item) => {
+        switch (this.state.filter) {
+            case ('all'):
+                return true
+            case ('complited'):
+                return item.done
+            case ('active'):
+                return !item.done
+                
+        }
+        
+    }
+     activeButtonClass = (e) => {
+        if (e.target.innerHTML.toLowerCase() === this.state.filter) {
+        e.target.className='selected'
+        } else {
+            e.target.className=''
+        }
+    }
+    
     render() {
         const elseToDo = this.state.toDoData.length - this.state.toDoData.filter((el) => el.done).length
           return <section className='todoapp'>
@@ -61,12 +95,18 @@ class App extends React.Component{
                 addItem={this.addItem}/>
         <section className='main'>
                 <Tasklist
-                    toDoItem={this.state.toDoData}
+                    toDoItem={this.state.toDoData.filter(this.getFilteredItems)}
                     onDestroyed={this.deleteItem}
                     onToggleDone={ this.onToggleDone}/>
         </section>
             <Footer
-                elseToDo={ elseToDo}/>
+                elseToDo={elseToDo}
+                deleteComplited={this.deleteComplited}
+                filter={this.setFilter}
+                getFilteredItems={this.getFilteredItems}
+                activeButtonClass={this.activeButtonClass}  
+                
+              />
         </section>
         
 
