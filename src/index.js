@@ -45,7 +45,10 @@ class App extends React.Component{
 
     editForm = (text) => {
         this.setState(({ toDoData }) => {
+            const editId = toDoData.findIndex((el) => el.edit)
+            const newEditId = toDoData[editId]
             
+
         })
     }
 
