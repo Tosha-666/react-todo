@@ -1,31 +1,30 @@
 import React from 'react';
 import { formatDistanceToNow } from 'date-fns'
+import EditItem from './NewtaskForm';
 
 
 
 export default class Task extends React.Component{
 
-  // state = {
-  //   complited:false
-  // }
 
-  //   onLabelClick=()=> {
-  //     this.setState((state) => {
-  //       return {
-  //         complited:!state.complited
-  //       }
-    
-  // })
-  // }
   render() {
-    const { label, date, onDestroyed, onToggleDone, done, checked } = this.props
+    const { label, date, onDestroyed, onToggleDone, done, checked, edit, onEdit, addItem } = this.props
     const daysBetween = formatDistanceToNow(date)
   
-    let classNames 
-    if (done) {
-      classNames='completed'
+    let classNames =()=> {
+     
+    if (edit) {
+      return 'editing'
+    } else if (done) {
+
+      return ('completed')
+      }  
+      
     }
-    return <li className={classNames} >
+     
+    
+    return <li className={classNames()} >
+
         <div className="view">
         <input
           className="toggle"
@@ -38,12 +37,16 @@ export default class Task extends React.Component{
                   onClick = {onToggleDone}>{label}</span>
             <span className="created">created { daysBetween } ago</span>
           </label>
-          <button className="icon icon-edit"></button>
+        <button className="icon icon-edit"
+                onClick={onEdit}></button>
         <button
           className="icon icon-destroy"
           onClick = {onDestroyed}
         ></button>
-          </div>
+      </div>
+      {(edit) && <EditItem
+        addItem ={addItem}
+      />}
       </li>
 
   }

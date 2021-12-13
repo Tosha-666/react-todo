@@ -20,13 +20,16 @@ class App extends React.Component{
             return {toDoData: newArray}
         })
     }
+ 
+
     addItem = (text) => {
         const newItem={
             label: text,
             id: this.maxId++,
             done: false,
             date: new Date(),
-            checked:false
+            checked: false,
+            edit:false
         }
 
         this.setState(({toDoData})=>{
@@ -38,7 +41,28 @@ class App extends React.Component{
             }
         })
         
-    }    
+    }
+
+    editForm = (text) => {
+        this.setState(({ toDoData }) => {
+            
+        })
+    }
+
+    onEdit = (id) => {
+        this.setState(({ toDoData }) => {
+            const editId = toDoData.findIndex((el) => el.id === id)
+            const oldItem = toDoData[editId]
+            const newItem = { ...oldItem, edit: !oldItem.edit }
+            const newArr = [
+                ...toDoData.slice(0, editId), newItem, ...toDoData.slice(editId+1)
+            ]
+            console.log(newArr);
+            return {
+                toDoData:newArr
+            }
+    })
+}
     onToggleDone = (id) => {
         this.setState(({ toDoData }) => {
             const doneId = toDoData.findIndex((el) => el.id === id)
@@ -63,10 +87,8 @@ class App extends React.Component{
     }
 
     setFilter = (filter) => {
-        
         this.setState({ filter })
-        console.log(this.state.filter);
-    };
+            };
 
     getFilteredItems = (item) => {
         switch (this.state.filter) {
@@ -76,15 +98,16 @@ class App extends React.Component{
                 return item.done
             case ('active'):
                 return !item.done
-                
+
         }
         
     }
-     activeButtonClass = (e) => {
-        if (e.target.innerHTML.toLowerCase() === this.state.filter) {
-        e.target.className='selected'
+    activeButtonClass = (buttonName) => {
+         
+        if (buttonName === this.state.filter) {
+            return 'selected'
         } else {
-            e.target.className=''
+           return ''
         }
     }
     
@@ -97,7 +120,10 @@ class App extends React.Component{
                 <Tasklist
                     toDoItem={this.state.toDoData.filter(this.getFilteredItems)}
                     onDestroyed={this.deleteItem}
-                    onToggleDone={ this.onToggleDone}/>
+                    onToggleDone={this.onToggleDone}
+                    onEdit={this.onEdit}
+                    addItem={this.addItem}/>
+                   
         </section>
             <Footer
                 elseToDo={elseToDo}

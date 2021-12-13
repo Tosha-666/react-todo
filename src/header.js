@@ -5,13 +5,8 @@ import React from 'react';
 class Header extends React.Component  {
     state = { value: '' }
    
-    // valueListener = (e) => {
-    //     if (e.keyCode === 13) {
-    //         console.log(this.state.value)
-    //     }
-    // }
-     addItem=this.props.addItem
-    onSubmiteForm = (e) => {
+    addItem=this.props.addItem
+        onSubmiteForm = (e) => {
         e.preventDefault()
         this.addItem(this.state.value);
         this.setState({
@@ -34,9 +29,7 @@ class Header extends React.Component  {
                  <input className="new-todo"
                 placeholder="What needs to be done?"
                 autoFocus={true}
-                // onKeyDown={this.valueListener}
-                 value={this.state.value}
-                 
+                value={this.state.value}
                 onChange = {this.onLabelChange}>
                  
                  </input>
