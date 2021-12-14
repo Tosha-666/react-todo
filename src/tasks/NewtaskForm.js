@@ -1,15 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 
 export default class EditItem extends React.Component {
-    state = { value: '' }
-    addItem=this.props.addItem
+    static defaultProps = {
+        editForm: () => { },
+        label: ''
+    }
+    editForm = this.props.editForm
+    label = this.props.label
+    state = { value:  this.label  }
+   
     onSubmiteForm = (e) => {
         e.preventDefault()
-        this.addItem(this.state.value, );
-        this.setState({
-            value:''
-        })
+        this.editForm(this.state.value)
+
     }
     onLabelChange = (e) => {
         this.setState({
@@ -18,14 +23,13 @@ export default class EditItem extends React.Component {
     }
     
     render() {
+        
         return <form
             onSubmit={this.onSubmiteForm}>
-            
           <input
             type="text"
             className="edit"
             value={this.state.value}
-                 
             onChange = {this.onLabelChange}/>
       </form>
       }

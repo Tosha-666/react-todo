@@ -1,9 +1,12 @@
-
-import React from 'react';
+import React from 'react'
+import PropTypes from 'prop-types'
 
 
 export default class TaskList extends React.Component{
-
+  static defaultProps = {
+    filter: () => { },
+    activeButtonClass: () => { }
+}
   render() {
     const { filter, activeButtonClass } = this.props
     

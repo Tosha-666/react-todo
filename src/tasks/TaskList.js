@@ -1,10 +1,17 @@
 import React from 'react';
-
 import Task from './Task';
-import NewTaskForm from './NewtaskForm';
+import PropTypes from 'prop-types'
 
 
-const Tasklist = ({ toDoItem, onDestroyed, onToggleDone, onEdit, addItem }) => {
+const Tasklist = ({ toDoItem, onDestroyed, onToggleDone, onEdit, editForm }) => {
+    Tasklist.defaultProps = {
+        onDestroyed: () => { },
+        onEdit: () => { },
+        onToggleDone: () => { },
+        editForm: () => { }
+        
+      
+    }
     const elements = toDoItem.map((item) => {
     
     return <Task {...item}
@@ -12,9 +19,8 @@ const Tasklist = ({ toDoItem, onDestroyed, onToggleDone, onEdit, addItem }) => {
         onDestroyed={() => onDestroyed(item.id)}
         onToggleDone={() => onToggleDone(item.id)}
         onEdit={() => onEdit(item.id)}
-        addItem ={addItem}
-        
-    />
+        editForm = {editForm}
+         />
 })
 return <ul className="todo-list">
         {elements}

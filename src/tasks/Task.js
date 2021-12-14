@@ -8,7 +8,7 @@ export default class Task extends React.Component{
 
 
   render() {
-    const { label, date, onDestroyed, onToggleDone, done, checked, edit, onEdit, addItem } = this.props
+    const { label, date, onDestroyed, onToggleDone, done, checked, edit, onEdit, editForm } = this.props
     const daysBetween = formatDistanceToNow(date)
   
     let classNames =()=> {
@@ -45,7 +45,8 @@ export default class Task extends React.Component{
         ></button>
       </div>
       {(edit) && <EditItem
-        addItem ={addItem}
+        editForm={editForm}
+        label={label}
       />}
       </li>
 

@@ -1,8 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 
 
 
 class Header extends React.Component  {
+    static defaultProps = {
+        addItem: () => { },
+    }
+   
     state = { value: '' }
    
     addItem=this.props.addItem

@@ -42,13 +42,17 @@ class App extends React.Component{
         })
         
     }
-
     editForm = (text) => {
         this.setState(({ toDoData }) => {
             const editId = toDoData.findIndex((el) => el.edit)
-            const newEditId = toDoData[editId]
-            
-
+            let newEditId = toDoData[editId]
+            newEditId = {...newEditId, label:text, edit:false}
+            const newArr = [
+                ...toDoData.slice(0, editId), newEditId, ...toDoData.slice(editId + 1)
+            ]
+            return {
+                toDoData:newArr
+            }
         })
     }
 
@@ -60,12 +64,11 @@ class App extends React.Component{
             const newArr = [
                 ...toDoData.slice(0, editId), newItem, ...toDoData.slice(editId+1)
             ]
-            console.log(newArr);
             return {
                 toDoData:newArr
             }
-    })
-}
+        })
+    }
     onToggleDone = (id) => {
         this.setState(({ toDoData }) => {
             const doneId = toDoData.findIndex((el) => el.id === id)
@@ -81,7 +84,6 @@ class App extends React.Component{
             }
         })
     }
-    
     deleteComplited = () => {
         const uncomplitedItems = this.state.toDoData.filter((item) => !item.done)
         this.setState(
@@ -101,9 +103,9 @@ class App extends React.Component{
                 return item.done
             case ('active'):
                 return !item.done
-
+            default: 
+                return true
         }
-        
     }
     activeButtonClass = (buttonName) => {
          
@@ -113,19 +115,18 @@ class App extends React.Component{
            return ''
         }
     }
-    
     render() {
         const elseToDo = this.state.toDoData.length - this.state.toDoData.filter((el) => el.done).length
           return <section className='todoapp'>
             <Header
                 addItem={this.addItem}/>
         <section className='main'>
-                <Tasklist
-                    toDoItem={this.state.toDoData.filter(this.getFilteredItems)}
-                    onDestroyed={this.deleteItem}
-                    onToggleDone={this.onToggleDone}
-                    onEdit={this.onEdit}
-                    addItem={this.addItem}/>
+            <Tasklist
+                toDoItem={this.state.toDoData.filter(this.getFilteredItems)}
+                onDestroyed={this.deleteItem}
+                onToggleDone={this.onToggleDone}
+                onEdit={this.onEdit}
+                editForm = {this.editForm} />
                    
         </section>
             <Footer
@@ -133,9 +134,7 @@ class App extends React.Component{
                 deleteComplited={this.deleteComplited}
                 filter={this.setFilter}
                 getFilteredItems={this.getFilteredItems}
-                activeButtonClass={this.activeButtonClass}  
-                
-              />
+                activeButtonClass={this.activeButtonClass}  />
         </section>
         
 
