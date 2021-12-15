@@ -6,7 +6,11 @@ export default class TaskList extends React.Component{
   static defaultProps = {
     filter: () => { },
     activeButtonClass: () => { }
-}
+  }
+  static propTypes = {
+    filter: PropTypes.func,
+    activeButtonClass: PropTypes.func
+  }
   render() {
     const { filter, activeButtonClass } = this.props
     

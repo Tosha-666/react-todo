@@ -5,7 +5,11 @@ import PropTypes from 'prop-types'
 export default class EditItem extends React.Component {
     static defaultProps = {
         editForm: () => { },
-        label: ''
+        label: () => { }
+    }
+    static propTypes = {
+        editForm: PropTypes.func,
+        label: PropTypes.func
     }
     editForm = this.props.editForm
     label = this.props.label

@@ -7,7 +7,9 @@ class Header extends React.Component  {
     static defaultProps = {
         addItem: () => { },
     }
-   
+    static propTypes = {
+       addItem: PropTypes.func
+   }
     state = { value: '' }
    
     addItem=this.props.addItem

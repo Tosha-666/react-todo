@@ -4,6 +4,13 @@ import PropTypes from 'prop-types'
 
 
 export default class Footer extends React.Component{
+    static propTypes = {
+        elseToDo: PropTypes.number,
+        deleteComplited: PropTypes.func,
+        filter: PropTypes.func,
+        getFilteredItems: PropTypes.func,
+        activeButtonClass: PropTypes.func,
+    }
     render() {
         const { elseToDo, deleteComplited, filter, getFilteredItems, activeButtonClass} = this.props
         

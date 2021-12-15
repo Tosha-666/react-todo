@@ -9,8 +9,14 @@ const Tasklist = ({ toDoItem, onDestroyed, onToggleDone, onEdit, editForm }) => 
         onEdit: () => { },
         onToggleDone: () => { },
         editForm: () => { }
-        
-      
+    }
+
+    Tasklist.propTypes = {
+        toDoItem: PropTypes.arrayOf(PropTypes.object),
+        onDestroyed:PropTypes.func,
+        onEdit: PropTypes.func,
+        onToggleDone: PropTypes.func,
+        editForm: PropTypes.func
     }
     const elements = toDoItem.map((item) => {
     

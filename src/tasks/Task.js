@@ -4,8 +4,8 @@ import EditItem from './NewtaskForm';
 
 
 
-export default class Task extends React.Component{
 
+export default class Task extends React.Component{
 
   render() {
     const { label, date, onDestroyed, onToggleDone, done, checked, edit, onEdit, editForm } = this.props
